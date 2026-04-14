@@ -1,268 +1,580 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Happy Birthday Priya 💕</title>
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <title>A Special Surprise 💕</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet"/>
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    :root{
+      --pink:#d4548a;--dark:#b5294e;--light:#fce4ec;--soft:#ffd6e8;
+      --text:#6b3050;--white:#fff;--card:#fff;
+    }
+    body{font-family:'Quicksand',sans-serif;background:linear-gradient(160deg,#fff0f5,#ffe4ef,#ffd6e8);min-height:100vh;overflow-x:hidden;color:var(--text);}
 
-    :root {
-      --pink: #d4548a;
-      --dark-pink: #b5294e;
-      --light-pink: #fce4ec;
-      --soft: #ffd6e8;
-      --text: #6b3050;
-      --card: #ffffff;
+    /* HEARTS BG */
+    #hearts-bg{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
+    .fh{position:absolute;bottom:-40px;opacity:0;animation:floatUp linear infinite;}
+    @keyframes floatUp{0%{opacity:0;transform:translateY(0) scale(.6) rotate(-10deg);}15%{opacity:.7;}85%{opacity:.3;}100%{opacity:0;transform:translateY(-110vh) scale(1.1) rotate(15deg);}}
+
+    /* PAGES */
+    .page{display:none;position:relative;z-index:1;min-height:100vh;}
+    .page.active{display:block;}
+
+    /* ══════════════════════════════
+       PAGE 1 — LOGIN
+    ══════════════════════════════ */
+    #page-login{
+      display:flex;flex-direction:column;align-items:center;justify-content:center;
+      min-height:100vh;padding:40px 24px;text-align:center;
+    }
+    #page-login .lock-icon{font-size:52px;margin-bottom:16px;animation:pulse 2s ease-in-out infinite;}
+    @keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.1);}}
+    #page-login h1{font-family:'Dancing Script',cursive;font-size:36px;color:var(--dark);margin-bottom:8px;}
+    #page-login p{font-size:14px;color:var(--pink);margin-bottom:32px;}
+    .login-card{background:white;border-radius:24px;padding:32px 28px;box-shadow:0 8px 32px rgba(212,84,138,.15);width:100%;max-width:360px;}
+    .login-card label{display:block;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--pink);margin-bottom:8px;text-align:left;}
+    .login-card input{
+      width:100%;padding:14px 18px;border:1.5px solid #f8bbd9;border-radius:14px;
+      font-family:'Quicksand',sans-serif;font-size:15px;color:var(--text);
+      outline:none;transition:.2s;margin-bottom:20px;background:#fff9fb;letter-spacing:3px;text-align:center;
+    }
+    .login-card input:focus{border-color:var(--pink);background:#fff;}
+    .btn-primary{
+      width:100%;padding:14px;background:linear-gradient(135deg,#f48aaa,var(--dark));
+      color:white;border:none;border-radius:14px;font-family:'Quicksand',sans-serif;
+      font-size:15px;font-weight:700;cursor:pointer;transition:.2s;letter-spacing:1px;
+    }
+    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(181,41,78,.3);}
+    .btn-primary:active{transform:scale(.98);}
+    .login-hint{font-size:12px;color:#c0608a;margin-top:14px;opacity:.7;}
+    .login-error{color:#e24b4b;font-size:13px;margin-top:10px;display:none;}
+
+    /* ══════════════════════════════
+       NAVBAR
+    ══════════════════════════════ */
+    .navbar{
+      position:sticky;top:0;z-index:100;
+      background:rgba(255,255,255,.85);backdrop-filter:blur(12px);
+      border-bottom:1px solid #fce4ec;
+      display:flex;align-items:center;justify-content:space-between;
+      padding:12px 20px;
+    }
+    .nav-logo{font-family:'Dancing Script',cursive;font-size:22px;color:var(--dark);}
+    .nav-links{display:flex;gap:6px;}
+    .nav-btn{
+      padding:7px 14px;border-radius:20px;border:1.5px solid #f8bbd9;
+      background:transparent;font-family:'Quicksand',sans-serif;font-size:12px;font-weight:600;
+      color:var(--pink);cursor:pointer;transition:.2s;
+    }
+    .nav-btn:hover,.nav-btn.active{background:var(--pink);color:white;border-color:var(--pink);}
+
+    /* ══════════════════════════════
+       PAGE 2 — HOME / HERO
+    ══════════════════════════════ */
+    #page-home .hero{text-align:center;padding:50px 24px 30px;animation:fadeDown 1s ease both;}
+    @keyframes fadeDown{from{opacity:0;transform:translateY(-30px);}to{opacity:1;transform:translateY(0);}}
+    .hero-label{font-size:11px;letter-spacing:5px;text-transform:uppercase;color:var(--pink);margin-bottom:10px;}
+    .hero-name{font-family:'Dancing Script',cursive;font-size:clamp(52px,14vw,80px);color:var(--dark);line-height:1;text-shadow:0 2px 20px rgba(181,41,78,.18);}
+    .hero-sub{font-size:14px;color:var(--pink);margin-top:10px;font-weight:500;}
+
+    .countdown{
+      margin:0 20px 28px;background:white;border-radius:22px;
+      padding:22px 20px;box-shadow:0 6px 24px rgba(212,84,138,.12);
+      text-align:center;animation:fadeUp 1s .3s ease both;
+    }
+    @keyframes fadeUp{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
+    .cd-title{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--pink);margin-bottom:16px;}
+    .cd-grid{display:flex;justify-content:center;align-items:center;gap:8px;}
+    .cd-unit{display:flex;flex-direction:column;align-items:center;}
+    .cd-num{
+      font-size:30px;font-weight:700;color:var(--dark);
+      background:linear-gradient(135deg,#fce4ec,#ffd6e8);
+      width:66px;height:66px;border-radius:14px;
+      display:flex;align-items:center;justify-content:center;
+      transition:transform .15s;
+    }
+    .cd-num.tick{transform:scale(1.1);}
+    .cd-lbl{font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--pink);margin-top:5px;}
+    .cd-sep{font-size:26px;font-weight:700;color:var(--pink);padding-bottom:18px;}
+
+    .music-bar{
+      margin:0 20px 28px;background:white;border-radius:18px;
+      padding:16px 20px;box-shadow:0 6px 24px rgba(212,84,138,.12);
+      display:flex;align-items:center;gap:16px;animation:fadeUp 1s .5s ease both;
+    }
+    .music-btn{
+      width:48px;height:48px;border-radius:50%;
+      background:linear-gradient(135deg,#f48aaa,var(--pink));
+      border:none;cursor:pointer;font-size:18px;color:white;
+      display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:.2s;
+    }
+    .music-btn:hover{transform:scale(1.1);}
+    .music-name{font-size:14px;font-weight:600;color:var(--dark);}
+    .music-artist{font-size:12px;color:var(--pink);margin-top:2px;}
+    .waves{display:flex;gap:3px;align-items:flex-end;height:24px;}
+    .w{width:4px;border-radius:2px;background:#f48aaa;animation:wv 1.2s ease-in-out infinite;}
+    .w:nth-child(1){height:8px;animation-delay:0s;}.w:nth-child(2){height:18px;animation-delay:.15s;}
+    .w:nth-child(3){height:11px;animation-delay:.3s;}.w:nth-child(4){height:22px;animation-delay:.08s;}
+    .w:nth-child(5){height:14px;animation-delay:.22s;}
+    @keyframes wv{0%,100%{transform:scaleY(1);}50%{transform:scaleY(.35);}}
+
+    .page-nav-cards{
+      display:grid;grid-template-columns:1fr 1fr;gap:14px;
+      padding:0 20px 40px;animation:fadeUp 1s .6s ease both;
+    }
+    .pnc{
+      background:white;border-radius:20px;padding:24px 16px;text-align:center;
+      box-shadow:0 6px 24px rgba(212,84,138,.1);cursor:pointer;
+      transition:transform .3s cubic-bezier(.34,1.56,.64,1),box-shadow .3s;
+      border:2px solid transparent;
+    }
+    .pnc:hover{transform:translateY(-6px) scale(1.03);box-shadow:0 12px 32px rgba(212,84,138,.2);border-color:#f8bbd9;}
+    .pnc-icon{font-size:36px;margin-bottom:10px;}
+    .pnc-title{font-family:'Dancing Script',cursive;font-size:20px;color:var(--dark);}
+    .pnc-sub{font-size:11px;color:var(--pink);margin-top:4px;}
+
+    /* ══════════════════════════════
+       PAGE 3 — PHOTOS
+    ══════════════════════════════ */
+    .section-hero{text-align:center;padding:36px 24px 20px;}
+    .section-title{font-family:'Dancing Script',cursive;font-size:38px;color:var(--dark);}
+    .section-sub{font-size:13px;color:var(--pink);margin-top:6px;}
+
+    .photo-grid{
+      display:grid;grid-template-columns:repeat(2,1fr);gap:14px;
+      padding:0 20px 40px;
+    }
+    .photo-item{
+      background:white;border-radius:18px;overflow:hidden;
+      box-shadow:0 4px 16px rgba(212,84,138,.12);
+      transition:transform .3s cubic-bezier(.34,1.56,.64,1);cursor:pointer;
+    }
+    .photo-item:hover{transform:scale(1.04) rotate(-1deg);}
+    .photo-item:nth-child(even):hover{transform:scale(1.04) rotate(1deg);}
+    .photo-frame-grid{
+      width:100%;aspect-ratio:1;
+      background:linear-gradient(135deg,#fce4ec,#f8bbd9);
+      display:flex;flex-direction:column;align-items:center;justify-content:center;
+      color:var(--pink);font-size:12px;font-weight:600;gap:6px;
+    }
+    .photo-frame-grid img{width:100%;height:100%;object-fit:cover;}
+    .photo-frame-grid span{font-size:32px;}
+    .photo-caption-grid{
+      padding:10px 12px 12px;
+      font-family:'Dancing Script',cursive;font-size:16px;color:var(--dark);text-align:center;
     }
 
-    body {
-      font-family: 'Quicksand', sans-serif;
-      background: linear-gradient(160deg, #fff0f5 0%, #ffe4ef 50%, #ffd6e8 100%);
-      min-height: 100vh;
-      overflow-x: hidden;
-      color: var(--text);
+    /* LIGHTBOX */
+    .lightbox{
+      display:none;position:fixed;inset:0;z-index:999;
+      background:rgba(0,0,0,.85);align-items:center;justify-content:center;
+      flex-direction:column;gap:16px;
+    }
+    .lightbox.open{display:flex;}
+    .lightbox img{max-width:90vw;max-height:70vh;border-radius:16px;object-fit:contain;}
+    .lightbox-cap{color:white;font-family:'Dancing Script',cursive;font-size:22px;}
+    .lightbox-close{
+      position:absolute;top:20px;right:24px;
+      background:none;border:none;color:white;font-size:32px;cursor:pointer;
     }
 
-    #hearts-bg {
-      position: fixed; inset: 0;
-      pointer-events: none; z-index: 0;
-      overflow: hidden;
+    /* ══════════════════════════════
+       PAGE 4 — VIDEOS
+    ══════════════════════════════ */
+    .video-grid{display:flex;flex-direction:column;gap:16px;padding:0 20px 40px;}
+    .video-item{
+      background:white;border-radius:18px;overflow:hidden;
+      box-shadow:0 4px 16px rgba(212,84,138,.12);
     }
-    .fh {
-      position: absolute;
-      bottom: -40px;
-      opacity: 0;
-      animation: floatUp linear infinite;
+    .video-thumb{
+      width:100%;aspect-ratio:16/9;
+      background:linear-gradient(135deg,#f3e5f5,#fce4ec);
+      display:flex;flex-direction:column;align-items:center;justify-content:center;
+      cursor:pointer;position:relative;overflow:hidden;
     }
-    @keyframes floatUp {
-      0%   { opacity: 0;   transform: translateY(0) scale(0.6) rotate(-10deg); }
-      15%  { opacity: 0.7; }
-      85%  { opacity: 0.3; }
-      100% { opacity: 0;   transform: translateY(-110vh) scale(1.1) rotate(15deg); }
+    .video-thumb video{width:100%;height:100%;object-fit:cover;display:none;}
+    .video-thumb video.loaded{display:block;}
+    .play-overlay{
+      position:absolute;inset:0;display:flex;flex-direction:column;
+      align-items:center;justify-content:center;gap:8px;
+      background:rgba(181,41,78,.08);transition:.2s;
     }
+    .play-circle{
+      width:56px;height:56px;border-radius:50%;
+      background:linear-gradient(135deg,#f48aaa,var(--dark));
+      display:flex;align-items:center;justify-content:center;
+      font-size:22px;color:white;
+      box-shadow:0 4px 16px rgba(181,41,78,.3);
+      transition:transform .2s;
+    }
+    .video-thumb:hover .play-circle{transform:scale(1.1);}
+    .play-label{font-size:12px;color:var(--dark);font-weight:600;}
+    .video-info{padding:14px 16px;}
+    .video-title{font-size:14px;font-weight:600;color:var(--dark);}
+    .video-desc{font-size:12px;color:var(--pink);margin-top:3px;}
 
-    .page { position: relative; z-index: 1; max-width: 480px; margin: 0 auto; padding: 0 0 60px; }
+    /* ══════════════════════════════
+       PAGE 5 — MESSAGES
+    ══════════════════════════════ */
+    .messages-wrap{padding:0 20px 40px;display:flex;flex-direction:column;gap:14px;}
+    .msg-card{
+      background:white;border-radius:18px;padding:20px;
+      box-shadow:0 4px 16px rgba(212,84,138,.1);
+      border-left:4px solid #f48aaa;animation:fadeUp .6s ease both;
+    }
+    .msg-from{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--pink);font-weight:700;margin-bottom:6px;}
+    .msg-text{font-size:14px;line-height:1.8;color:var(--text);}
+    .msg-emoji{font-size:20px;margin-top:8px;}
 
-    .hero { text-align: center; padding: 50px 24px 24px; animation: fadeDown 1s ease both; }
-    @keyframes fadeDown {
-      from { opacity: 0; transform: translateY(-30px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    .hero-label { font-size: 11px; letter-spacing: 5px; text-transform: uppercase; color: var(--pink); margin-bottom: 10px; }
-    .hero-name  { font-family: 'Dancing Script', cursive; font-size: clamp(52px, 14vw, 72px); color: var(--dark-pink); line-height: 1; text-shadow: 0 2px 20px rgba(181,41,78,0.18); }
-    .hero-sub   { font-size: 14px; color: var(--pink); margin-top: 10px; font-weight: 500; }
-
-    .photos { display: flex; justify-content: center; gap: 14px; padding: 10px 20px 20px; flex-wrap: wrap; animation: fadeUp 1s 0.3s ease both; }
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    .photo-card {
-      background: white; border-radius: 18px; padding: 8px 8px 12px;
-      box-shadow: 0 6px 24px rgba(212,84,138,0.14);
-      transition: transform 0.35s cubic-bezier(.34,1.56,.64,1);
-      cursor: pointer; text-align: center;
-    }
-    .photo-card:hover               { transform: rotate(-3deg) scale(1.06); }
-    .photo-card:nth-child(2):hover  { transform: rotate(3deg)  scale(1.06); }
-    .photo-card:nth-child(3):hover  { transform: rotate(-2deg) scale(1.06); }
-
-    .photo-frame {
-      width: 120px; height: 120px; border-radius: 12px; overflow: hidden;
-      background: linear-gradient(135deg, #fce4ec, #f8bbd9);
-      display: flex; align-items: center; justify-content: center;
-      flex-direction: column; color: var(--pink); font-size: 11px; font-weight: 600; gap: 6px;
-    }
-    .photo-frame img { width: 100%; height: 100%; object-fit: cover; }
-    .photo-frame span { font-size: 30px; }
-    .photo-caption { font-family: 'Dancing Script', cursive; font-size: 15px; color: var(--dark-pink); margin-top: 8px; }
-
-    .countdown {
-      margin: 0 20px 24px; background: white; border-radius: 22px;
-      padding: 22px 20px; box-shadow: 0 6px 24px rgba(212,84,138,0.12);
-      text-align: center; animation: fadeUp 1s 0.5s ease both;
-    }
-    .cd-title { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--pink); margin-bottom: 16px; }
-    .cd-grid  { display: flex; justify-content: center; align-items: center; gap: 8px; }
-    .cd-unit  { display: flex; flex-direction: column; align-items: center; }
-    .cd-num   {
-      font-size: 32px; font-weight: 600; color: var(--dark-pink);
-      background: linear-gradient(135deg, #fce4ec, #ffd6e8);
-      width: 68px; height: 68px; border-radius: 14px;
-      display: flex; align-items: center; justify-content: center;
-      transition: transform 0.15s;
-    }
-    .cd-num.tick { transform: scale(1.08); }
-    .cd-lbl  { font-size: 9px; letter-spacing: 1px; text-transform: uppercase; color: var(--pink); margin-top: 5px; }
-    .cd-sep  { font-size: 28px; font-weight: 700; color: var(--pink); padding-bottom: 18px; }
-
-    .music-bar {
-      margin: 0 20px 24px; background: white; border-radius: 18px;
-      padding: 16px 20px; box-shadow: 0 6px 24px rgba(212,84,138,0.12);
-      display: flex; align-items: center; gap: 16px;
-      animation: fadeUp 1s 0.6s ease both;
-    }
-    .music-btn {
-      width: 48px; height: 48px; border-radius: 50%;
-      background: linear-gradient(135deg, #f48aaa, var(--pink));
-      border: none; cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 18px; color: white; flex-shrink: 0;
-      transition: transform 0.2s;
-    }
-    .music-btn:hover { transform: scale(1.1); }
-    .music-name   { font-size: 14px; font-weight: 600; color: var(--dark-pink); }
-    .music-artist { font-size: 12px; color: var(--pink); margin-top: 2px; }
-    .waves { display: flex; gap: 3px; align-items: flex-end; height: 24px; }
-    .w { width: 4px; border-radius: 2px; background: #f48aaa; animation: wv 1.2s ease-in-out infinite; }
-    .w:nth-child(1){height:8px;  animation-delay:0s;}
-    .w:nth-child(2){height:18px; animation-delay:.15s;}
-    .w:nth-child(3){height:11px; animation-delay:.3s;}
-    .w:nth-child(4){height:22px; animation-delay:.08s;}
-    .w:nth-child(5){height:14px; animation-delay:.22s;}
-    @keyframes wv {
-      0%,100%{ transform:scaleY(1); }
-      50%    { transform:scaleY(0.35); }
-    }
-
-    .messages { padding: 0 20px; animation: fadeUp 1s 0.7s ease both; }
-    .msg-heading { font-family: 'Dancing Script', cursive; font-size: 28px; color: var(--dark-pink); text-align: center; margin-bottom: 16px; }
-    .msg-card { background: white; border-radius: 16px; padding: 18px 20px; margin-bottom: 12px; box-shadow: 0 4px 16px rgba(212,84,138,0.1); border-left: 4px solid #f48aaa; }
-    .msg-from { font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: var(--pink); font-weight: 600; margin-bottom: 6px; }
-    .msg-text { font-size: 14px; line-height: 1.7; color: var(--text); }
-
-    .footer { text-align: center; padding: 30px 20px 10px; font-family: 'Dancing Script', cursive; font-size: 22px; color: var(--pink); animation: fadeUp 1s 0.9s ease both; }
+    /* FOOTER */
+    .footer{text-align:center;padding:20px;font-family:'Dancing Script',cursive;font-size:20px;color:var(--pink);}
   </style>
 </head>
 <body>
 
-  <div id="hearts-bg"></div>
+<div id="hearts-bg"></div>
 
-  <div class="page">
+<!-- ═══════════════════════
+     PAGE 1 — LOGIN
+═══════════════════════ -->
+<div id="page-login" class="page active">
+  <div class="lock-icon">🎀</div>
+  <h1>A Special Surprise</h1>
+  <p>Enter the secret password to unlock 💕</p>
+  <div class="login-card">
+    <label>Secret Password</label>
+    <input type="password" id="pw-input" placeholder="✦ ✦ ✦ ✦ ✦" maxlength="20" onkeydown="if(event.key==='Enter')checkLogin()"/>
+    <button class="btn-primary" onclick="checkLogin()">Unlock Surprise 🎁</button>
+    <div class="login-error" id="login-error">Wrong password da! Try again 😅</div>
+    <!-- ✏️ HINT: Change hint text below or remove this line -->
+    <div class="login-hint">Hint: unga best friend's nickname 🤭</div>
+  </div>
+</div>
 
+<!-- ═══════════════════════
+     NAVBAR (hidden on login)
+═══════════════════════ -->
+<nav class="navbar" id="navbar" style="display:none;">
+  <div class="nav-logo">💕 Priya</div>
+  <div class="nav-links">
+    <button class="nav-btn active" onclick="showPage('home',this)">🏠</button>
+    <button class="nav-btn" onclick="showPage('photos',this)">📷</button>
+    <button class="nav-btn" onclick="showPage('videos',this)">🎬</button>
+    <button class="nav-btn" onclick="showPage('messages',this)">💌</button>
+  </div>
+</nav>
+
+<!-- ═══════════════════════
+     PAGE 2 — HOME
+═══════════════════════ -->
+<div id="page-home" class="page">
+  <div class="hero">
+    <div class="hero-label">✦ Happy Birthday ✦</div>
     <!-- ✏️ CHANGE: Friend peyar -->
-    <div class="hero">
-      <div class="hero-label">✦ Happy Birthday ✦</div>
-      <div class="hero-name">Priya 💕</div>
-      <div class="hero-sub">Today is all about you, my dearest friend</div>
-    </div>
-
-    <!-- ✏️ CHANGE: Photos — photo1.jpg, photo2.jpg, photo3.jpg same folder-la podu -->
-    <div class="photos">
-      <div class="photo-card">
-        <div class="photo-frame">
-          <span>📷</span>Add photo 1
-          <!-- Replace span with: <img src="photo1.jpg" /> -->
-        </div>
-        <div class="photo-caption">Best memories</div>
-      </div>
-      <div class="photo-card">
-        <div class="photo-frame" style="background:linear-gradient(135deg,#f3e5f5,#e1bee7);">
-          <span>🌸</span>Add photo 2
-        </div>
-        <div class="photo-caption">Always smiling</div>
-      </div>
-      <div class="photo-card">
-        <div class="photo-frame" style="background:linear-gradient(135deg,#fce4ec,#f8bbd9);">
-          <span>🎀</span>Add photo 3
-        </div>
-        <div class="photo-caption">Forever friends</div>
-      </div>
-    </div>
-
-    <!-- Countdown -->
-    <div class="countdown">
-      <div class="cd-title">⏳ Birthday countdown</div>
-      <div class="cd-grid">
-        <div class="cd-unit"><div class="cd-num" id="cd-d">00</div><div class="cd-lbl">Days</div></div>
-        <div class="cd-sep">:</div>
-        <div class="cd-unit"><div class="cd-num" id="cd-h">00</div><div class="cd-lbl">Hours</div></div>
-        <div class="cd-sep">:</div>
-        <div class="cd-unit"><div class="cd-num" id="cd-m">00</div><div class="cd-lbl">Mins</div></div>
-        <div class="cd-sep">:</div>
-        <div class="cd-unit"><div class="cd-num" id="cd-s">00</div><div class="cd-lbl">Secs</div></div>
-      </div>
-    </div>
-
-    <!-- ✏️ CHANGE: Song name -->
-    <div class="music-bar">
-      <button class="music-btn" id="play-btn" onclick="toggleMusic()">▶</button>
-      <div class="music-info">
-        <div class="music-name">Ennodu Nee Irundhaal</div>
-        <div class="music-artist">Unga favourite song 🎵</div>
-      </div>
-      <div class="waves">
-        <div class="w"></div><div class="w"></div><div class="w"></div>
-        <div class="w"></div><div class="w"></div>
-      </div>
-    </div>
-    <!-- ✏️ Song add pannanum: src="song.mp3" — same folder-la mp3 podu -->
-    <audio id="bgMusic" src="" loop></audio>
-
-    <!-- ✏️ CHANGE: Messages -->
-    <div class="messages">
-      <div class="msg-heading">💌 Messages with love</div>
-      <div class="msg-card">
-        <div class="msg-from">From: Your best friend</div>
-        <div class="msg-text">You are the most precious person in my life. Every moment with you is a memory I treasure forever. Wishing you all the happiness in the world! 🌹</div>
-      </div>
-      <div class="msg-card">
-        <div class="msg-from">From: The whole gang 🎉</div>
-        <div class="msg-text">Happy birthday to the one who makes every room brighter! We love you to the moon and back. 💕</div>
-      </div>
-    </div>
-
-    <div class="footer">Made with 💕 just for you</div>
-
+    <div class="hero-name">Priya 💕</div>
+    <div class="hero-sub">Today is all about you, my dearest friend</div>
   </div>
 
-  <script>
-    // Floating hearts
-    const emojis = ['💕','💗','💖','🌸','✨','💝','🎀','🌹'];
-    const bg = document.getElementById('hearts-bg');
-    function spawnHeart() {
-      const el = document.createElement('div');
-      el.className = 'fh';
-      el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-      el.style.cssText = `left:${Math.random()*100}%;font-size:${12+Math.random()*18}px;animation-duration:${5+Math.random()*5}s;animation-delay:${Math.random()*2}s;`;
-      bg.appendChild(el);
-      setTimeout(() => el.remove(), 12000);
+  <div class="countdown">
+    <div class="cd-title">⏳ Birthday countdown</div>
+    <div class="cd-grid">
+      <div class="cd-unit"><div class="cd-num" id="cd-d">00</div><div class="cd-lbl">Days</div></div>
+      <div class="cd-sep">:</div>
+      <div class="cd-unit"><div class="cd-num" id="cd-h">00</div><div class="cd-lbl">Hours</div></div>
+      <div class="cd-sep">:</div>
+      <div class="cd-unit"><div class="cd-num" id="cd-m">00</div><div class="cd-lbl">Mins</div></div>
+      <div class="cd-sep">:</div>
+      <div class="cd-unit"><div class="cd-num" id="cd-s">00</div><div class="cd-lbl">Secs</div></div>
+    </div>
+  </div>
+
+  <div class="music-bar">
+    <button class="music-btn" id="play-btn" onclick="toggleMusic()">▶</button>
+    <div style="flex:1">
+      <!-- ✏️ CHANGE: Song name -->
+      <div class="music-name">Ennodu Nee Irundhaal</div>
+      <div class="music-artist">Unga favourite song 🎵</div>
+    </div>
+    <div class="waves"><div class="w"></div><div class="w"></div><div class="w"></div><div class="w"></div><div class="w"></div></div>
+  </div>
+  <!-- ✏️ Add song: src="song.mp3" — same folder-la mp3 podu -->
+  <audio id="bgMusic" src="" loop></audio>
+
+  <div class="page-nav-cards">
+    <div class="pnc" onclick="showPage('photos',null)">
+      <div class="pnc-icon">📷</div>
+      <div class="pnc-title">Our Photos</div>
+      <div class="pnc-sub">Memories together</div>
+    </div>
+    <div class="pnc" onclick="showPage('videos',null)">
+      <div class="pnc-icon">🎬</div>
+      <div class="pnc-title">Videos</div>
+      <div class="pnc-sub">Special moments</div>
+    </div>
+    <div class="pnc" onclick="showPage('messages',null)">
+      <div class="pnc-icon">💌</div>
+      <div class="pnc-title">Messages</div>
+      <div class="pnc-sub">With love</div>
+    </div>
+    <div class="pnc" onclick="showPage('home',null);confettiBurst()">
+      <div class="pnc-icon">🎉</div>
+      <div class="pnc-title">Celebrate!</div>
+      <div class="pnc-sub">Tap for surprise</div>
+    </div>
+  </div>
+  <div class="footer">Made with 💕 just for you</div>
+</div>
+
+<!-- ═══════════════════════
+     PAGE 3 — PHOTOS
+═══════════════════════ -->
+<div id="page-photos" class="page">
+  <div class="section-hero">
+    <div class="section-title">📷 Our Memories</div>
+    <div class="section-sub">Every photo tells our story 💕</div>
+  </div>
+
+  <!-- ✏️ HOW TO ADD PHOTOS:
+       Replace <span>📷</span> + "Add photo X" text inside .photo-frame-grid
+       with: <img src="photo1.jpg" />
+       Put photo files in same folder as index.html
+  -->
+  <div class="photo-grid">
+    <div class="photo-item" onclick="openLightbox(this,'Best memories 💕')">
+      <div class="photo-frame-grid"><span>📷</span>Add photo 1</div>
+      <div class="photo-caption-grid">Best memories</div>
+    </div>
+    <div class="photo-item" onclick="openLightbox(this,'Always smiling 🌸')">
+      <div class="photo-frame-grid" style="background:linear-gradient(135deg,#f3e5f5,#e1bee7)"><span>🌸</span>Add photo 2</div>
+      <div class="photo-caption-grid">Always smiling</div>
+    </div>
+    <div class="photo-item" onclick="openLightbox(this,'Forever friends 🎀')">
+      <div class="photo-frame-grid" style="background:linear-gradient(135deg,#e8f5e9,#c8e6c9)"><span>🎀</span>Add photo 3</div>
+      <div class="photo-caption-grid">Forever friends</div>
+    </div>
+    <div class="photo-item" onclick="openLightbox(this,'The best day ✨')">
+      <div class="photo-frame-grid" style="background:linear-gradient(135deg,#fff8e1,#ffecb3)"><span>✨</span>Add photo 4</div>
+      <div class="photo-caption-grid">The best day</div>
+    </div>
+    <div class="photo-item" onclick="openLightbox(this,'So much fun 💖')">
+      <div class="photo-frame-grid" style="background:linear-gradient(135deg,#e3f2fd,#bbdefb)"><span>💖</span>Add photo 5</div>
+      <div class="photo-caption-grid">So much fun</div>
+    </div>
+    <div class="photo-item" onclick="openLightbox(this,'My favourite person 🌹')">
+      <div class="photo-frame-grid" style="background:linear-gradient(135deg,#fce4ec,#f8bbd9)"><span>🌹</span>Add photo 6</div>
+      <div class="photo-caption-grid">My favourite person</div>
+    </div>
+  </div>
+  <div class="footer">Made with 💕 just for you</div>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <img id="lightbox-img" src="" />
+  <div class="lightbox-cap" id="lightbox-cap"></div>
+</div>
+
+<!-- ═══════════════════════
+     PAGE 4 — VIDEOS
+═══════════════════════ -->
+<div id="page-videos" class="page">
+  <div class="section-hero">
+    <div class="section-title">🎬 Special Moments</div>
+    <div class="section-sub">Videos that made us smile 💕</div>
+  </div>
+
+  <!-- ✏️ HOW TO ADD VIDEOS:
+       1. Put video files in same folder (video1.mp4, video2.mp4...)
+       2. Inside .video-thumb div, add: <video src="video1.mp4" controls></video>
+       3. Remove the play overlay div if you want
+  -->
+  <div class="video-grid">
+    <div class="video-item">
+      <div class="video-thumb" onclick="playVideo(this,'video1.mp4')">
+        <!-- ✏️ Replace with: <video src="video1.mp4" controls style="width:100%;"></video> -->
+        <div class="play-overlay">
+          <div class="play-circle">▶</div>
+          <div class="play-label">Add video1.mp4</div>
+        </div>
+      </div>
+      <div class="video-info">
+        <!-- ✏️ CHANGE: Title and description -->
+        <div class="video-title">Our best day together</div>
+        <div class="video-desc">Remember this? 😄</div>
+      </div>
+    </div>
+
+    <div class="video-item">
+      <div class="video-thumb" onclick="playVideo(this,'video2.mp4')">
+        <div class="play-overlay">
+          <div class="play-circle">▶</div>
+          <div class="play-label">Add video2.mp4</div>
+        </div>
+      </div>
+      <div class="video-info">
+        <div class="video-title">That funny moment</div>
+        <div class="video-desc">Still makes me laugh 😂</div>
+      </div>
+    </div>
+
+    <div class="video-item">
+      <div class="video-thumb" onclick="playVideo(this,'video3.mp4')">
+        <div class="play-overlay">
+          <div class="play-circle">▶</div>
+          <div class="play-label">Add video3.mp4</div>
+        </div>
+      </div>
+      <div class="video-info">
+        <div class="video-title">A birthday message</div>
+        <div class="video-desc">Just for you 💕</div>
+      </div>
+    </div>
+  </div>
+  <div class="footer">Made with 💕 just for you</div>
+</div>
+
+<!-- ═══════════════════════
+     PAGE 5 — MESSAGES
+═══════════════════════ -->
+<div id="page-messages" class="page">
+  <div class="section-hero">
+    <div class="section-title">💌 With Love</div>
+    <div class="section-sub">Words straight from the heart</div>
+  </div>
+
+  <div class="messages-wrap">
+    <!-- ✏️ CHANGE: Edit from + message text. Copy block to add more! -->
+    <div class="msg-card" style="animation-delay:.1s">
+      <div class="msg-from">From: Your best friend 💕</div>
+      <div class="msg-text">You are the most precious person in my life. Every moment with you is a memory I treasure forever. Wishing you all the happiness, love, and joy in the world today and always!</div>
+      <div class="msg-emoji">🌹</div>
+    </div>
+
+    <div class="msg-card" style="animation-delay:.2s">
+      <div class="msg-from">From: The whole gang 🎉</div>
+      <div class="msg-text">Happy birthday to the one who makes every room brighter just by walking in! We love you to the moon and back. May this year be your most beautiful one yet.</div>
+      <div class="msg-emoji">💖</div>
+    </div>
+
+    <div class="msg-card" style="animation-delay:.3s">
+      <div class="msg-from">From: Your heart ✨</div>
+      <div class="msg-text">On this special day, I want you to know how much you mean to me. Your smile, your laugh, your kindness — everything about you is a gift to the world. Happy birthday, my dearest!</div>
+      <div class="msg-emoji">🎀</div>
+    </div>
+
+    <!-- ✏️ ADD MORE: Copy the msg-card block above and paste here -->
+  </div>
+  <div class="footer">Made with 💕 just for you</div>
+</div>
+
+<script>
+  // ════ HEARTS ════
+  const emojis=['💕','💗','💖','🌸','✨','💝','🎀','🌹'];
+  const bg=document.getElementById('hearts-bg');
+  function spawnHeart(){
+    const el=document.createElement('div');el.className='fh';
+    el.textContent=emojis[Math.floor(Math.random()*emojis.length)];
+    el.style.cssText=`left:${Math.random()*100}%;font-size:${12+Math.random()*18}px;animation-duration:${5+Math.random()*5}s;animation-delay:${Math.random()*2}s;`;
+    bg.appendChild(el);setTimeout(()=>el.remove(),12000);
+  }
+  for(let i=0;i<6;i++)setTimeout(spawnHeart,i*400);
+  setInterval(spawnHeart,900);
+
+  // ════ LOGIN ════
+  // ✏️ CHANGE: Password idha maaththu
+  const SECRET_PASSWORD = 'priya123';
+
+  function checkLogin(){
+    const val=document.getElementById('pw-input').value.trim();
+    const err=document.getElementById('login-error');
+    if(val.toLowerCase()===SECRET_PASSWORD.toLowerCase()){
+      document.getElementById('page-login').classList.remove('active');
+      document.getElementById('navbar').style.display='flex';
+      showPage('home',null);
+    } else {
+      err.style.display='block';
+      document.getElementById('pw-input').style.borderColor='#e24b4b';
+      setTimeout(()=>{err.style.display='none';document.getElementById('pw-input').style.borderColor='#f8bbd9';},2500);
     }
-    for(let i=0;i<6;i++) setTimeout(spawnHeart, i*400);
-    setInterval(spawnHeart, 900);
+  }
 
-    // ✏️ CHANGE: Birthday date — (YEAR, MONTH-1, DAY)
-    // Example: May 15 2025 = new Date(2025, 4, 15)
-    const BIRTHDAY = new Date(2025, 11, 25);
+  // ════ NAVIGATION ════
+  function showPage(name,btn){
+    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+    document.getElementById('page-'+name).classList.add('active');
+    document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+    if(btn)btn.classList.add('active');
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
 
-    function pad(n){ return String(n).padStart(2,'0'); }
-    function tick() {
-      let diff = BIRTHDAY - new Date();
-      if(diff <= 0) { ['cd-d','cd-h','cd-m','cd-s'].forEach(id=>document.getElementById(id).textContent='00'); return; }
-      const d = Math.floor(diff/86400000); diff -= d*86400000;
-      const h = Math.floor(diff/3600000);  diff -= h*3600000;
-      const m = Math.floor(diff/60000);    diff -= m*60000;
-      const s = Math.floor(diff/1000);
-      [['cd-d',d],['cd-h',h],['cd-m',m],['cd-s',s]].forEach(([id,v])=>{
-        const el = document.getElementById(id);
-        const val = pad(v);
-        if(el.textContent !== val){ el.textContent=val; el.classList.add('tick'); setTimeout(()=>el.classList.remove('tick'),150); }
-      });
+  // ════ COUNTDOWN ════
+  // ✏️ CHANGE: Birthday date — (YEAR, MONTH-1, DAY)
+  // Example: May 15 2025 = new Date(2025, 4, 15)
+  const BIRTHDAY=new Date(2025,11,25);
+  function pad(n){return String(n).padStart(2,'0');}
+  function tick(){
+    let diff=BIRTHDAY-new Date();
+    if(diff<=0){['cd-d','cd-h','cd-m','cd-s'].forEach(id=>{const e=document.getElementById(id);if(e)e.textContent='🎂';});return;}
+    const d=Math.floor(diff/86400000);diff-=d*86400000;
+    const h=Math.floor(diff/3600000); diff-=h*3600000;
+    const m=Math.floor(diff/60000);   diff-=m*60000;
+    const s=Math.floor(diff/1000);
+    [['cd-d',d],['cd-h',h],['cd-m',m],['cd-s',s]].forEach(([id,v])=>{
+      const el=document.getElementById(id);if(!el)return;
+      const val=pad(v);
+      if(el.textContent!==val){el.textContent=val;el.classList.add('tick');setTimeout(()=>el.classList.remove('tick'),150);}
+    });
+  }
+  tick();setInterval(tick,1000);
+
+  // ════ MUSIC ════
+  const audio=document.getElementById('bgMusic');
+  const playBtn=document.getElementById('play-btn');
+  let playing=false;
+  function toggleMusic(){
+    if(!audio.src||audio.src===window.location.href){
+      alert('Song add pannanum!\n\nsrc="song.mp3" update pannu\nSame folder-la mp3 file podu 🎵');return;
     }
-    tick(); setInterval(tick,1000);
+    if(playing){audio.pause();playBtn.textContent='▶';}
+    else{audio.play();playBtn.textContent='⏸';}
+    playing=!playing;
+  }
 
-    // Music
-    const audio = document.getElementById('bgMusic');
-    const btn = document.getElementById('play-btn');
-    let playing = false;
-    function toggleMusic() {
-      if(!audio.src || audio.src===window.location.href){ alert('Song add pannanum!\nsrc="song.mp3" update pannu, same folder-la mp3 podu.'); return; }
-      if(playing){ audio.pause(); btn.textContent='▶'; } else { audio.play(); btn.textContent='⏸'; }
-      playing=!playing;
+  // ════ PHOTOS LIGHTBOX ════
+  function openLightbox(item,cap){
+    const img=item.querySelector('img');
+    if(!img){return;}
+    document.getElementById('lightbox-img').src=img.src;
+    document.getElementById('lightbox-cap').textContent=cap;
+    document.getElementById('lightbox').classList.add('open');
+  }
+  function closeLightbox(){document.getElementById('lightbox').classList.remove('open');}
+
+  // ════ VIDEOS ════
+  function playVideo(thumb,src){
+    let vid=thumb.querySelector('video');
+    if(!vid){
+      alert('Video add pannanum!\n\n'+src+' same folder-la podu\nCode-la src="'+src+'" update pannu 🎬');return;
     }
-  </script>
+    const overlay=thumb.querySelector('.play-overlay');
+    if(overlay)overlay.style.display='none';
+    vid.classList.add('loaded');vid.play();
+  }
 
+  // ════ CONFETTI ════
+  function confettiBurst(){
+    const colors=['💕','🎉','✨','🎀','💖','🌸','🎊'];
+    for(let i=0;i<20;i++){
+      const el=document.createElement('div');
+      el.style.cssText=`position:fixed;left:${Math.random()*100}%;top:${Math.random()*40+20}%;font-size:${16+Math.random()*20}px;z-index:999;pointer-events:none;animation:floatUp ${2+Math.random()*2}s ease forwards;`;
+      el.textContent=colors[Math.floor(Math.random()*colors.length)];
+      document.body.appendChild(el);
+      setTimeout(()=>el.remove(),4000);
+    }
+  }
+</script>
 </body>
 </html>
