@@ -7,45 +7,30 @@
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet"/>
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-    :root{
-      --pink:#d4548a;--dark:#b5294e;--light:#fce4ec;--soft:#ffd6e8;
-      --text:#6b3050;--white:#fff;--card:#fff;
-    }
+    :root{--pink:#d4548a;--dark:#b5294e;--text:#6b3050;}
     body{font-family:'Quicksand',sans-serif;background:linear-gradient(160deg,#fff0f5,#ffe4ef,#ffd6e8);min-height:100vh;overflow-x:hidden;color:var(--text);}
-
     #hearts-bg{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
     .fh{position:absolute;bottom:-40px;opacity:0;animation:floatUp linear infinite;}
-    @keyframes floatUp{0%{opacity:0;transform:translateY(0) scale(.6) rotate(-10deg);}15%{opacity:.7;}85%{opacity:.3;}100%{opacity:0;transform:translateY(-110vh) scale(1.1) rotate(15deg);}}
-
+    @keyframes floatUp{0%{opacity:0;transform:translateY(0) scale(.6);}15%{opacity:.7;}85%{opacity:.3;}100%{opacity:0;transform:translateY(-110vh) scale(1.1);}}
     .page{display:none;position:relative;z-index:1;min-height:100vh;}
     .page.active{display:block;}
-
     #page-login{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:40px 24px;text-align:center;}
-    #page-login .lock-icon{font-size:52px;margin-bottom:16px;animation:pulse 2s ease-in-out infinite;}
-    @keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.1);}}
-    #page-login h1{font-family:'Dancing Script',cursive;font-size:36px;color:var(--dark);margin-bottom:8px;}
-    #page-login p{font-size:14px;color:var(--pink);margin-bottom:32px;}
-    .login-card{background:white;border-radius:24px;padding:32px 28px;box-shadow:0 8px 32px rgba(212,84,138,.15);width:100%;max-width:360px;}
-    .login-card label{display:block;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--pink);margin-bottom:8px;text-align:left;}
-    .login-card input{width:100%;padding:14px 18px;border:1.5px solid #f8bbd9;border-radius:14px;font-family:'Quicksand',sans-serif;font-size:15px;color:var(--text);outline:none;transition:.2s;margin-bottom:20px;background:#fff9fb;letter-spacing:3px;text-align:center;}
-    .login-card input:focus{border-color:var(--pink);background:#fff;}
-    .btn-primary{width:100%;padding:14px;background:linear-gradient(135deg,#f48aaa,var(--dark));color:white;border:none;border-radius:14px;font-family:'Quicksand',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:.2s;letter-spacing:1px;}
-    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(181,41,78,.3);}
-    .login-hint{font-size:12px;color:#c0608a;margin-top:14px;opacity:.7;}
-    .login-error{color:#e24b4b;font-size:13px;margin-top:10px;display:none;}
-
-    .navbar{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.85);backdrop-filter:blur(12px);border-bottom:1px solid #fce4ec;display:flex;align-items:center;justify-content:space-between;padding:12px 20px;}
+    .lock-icon{font-size:60px;margin-bottom:16px;animation:pulse 2s ease-in-out infinite;}
+    @keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.12);}}
+    #page-login h1{font-family:'Dancing Script',cursive;font-size:38px;color:var(--dark);margin-bottom:8px;}
+    #page-login p{font-size:15px;color:var(--pink);margin-bottom:36px;}
+    .open-btn{padding:18px 48px;background:linear-gradient(135deg,#f48aaa,var(--dark));color:white;border:none;border-radius:50px;font-family:'Quicksand',sans-serif;font-size:18px;font-weight:700;cursor:pointer;box-shadow:0 8px 28px rgba(181,41,78,.35);transition:.2s;letter-spacing:1px;}
+    .open-btn:hover{transform:translateY(-3px) scale(1.04);}
+    .navbar{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.88);backdrop-filter:blur(12px);border-bottom:1px solid #fce4ec;display:flex;align-items:center;justify-content:space-between;padding:12px 20px;}
     .nav-logo{font-family:'Dancing Script',cursive;font-size:22px;color:var(--dark);}
     .nav-links{display:flex;gap:6px;}
-    .nav-btn{padding:7px 14px;border-radius:20px;border:1.5px solid #f8bbd9;background:transparent;font-family:'Quicksand',sans-serif;font-size:12px;font-weight:600;color:var(--pink);cursor:pointer;transition:.2s;}
+    .nav-btn{padding:7px 14px;border-radius:20px;border:1.5px solid #f8bbd9;background:transparent;font-family:'Quicksand',sans-serif;font-size:13px;font-weight:600;color:var(--pink);cursor:pointer;transition:.2s;}
     .nav-btn:hover,.nav-btn.active{background:var(--pink);color:white;border-color:var(--pink);}
-
     .hero{text-align:center;padding:50px 24px 30px;animation:fadeDown 1s ease both;}
     @keyframes fadeDown{from{opacity:0;transform:translateY(-30px);}to{opacity:1;transform:translateY(0);}}
     .hero-label{font-size:11px;letter-spacing:5px;text-transform:uppercase;color:var(--pink);margin-bottom:10px;}
     .hero-name{font-family:'Dancing Script',cursive;font-size:clamp(52px,14vw,80px);color:var(--dark);line-height:1;text-shadow:0 2px 20px rgba(181,41,78,.18);}
     .hero-sub{font-size:14px;color:var(--pink);margin-top:10px;font-weight:500;}
-
     .countdown{margin:0 20px 28px;background:white;border-radius:22px;padding:22px 20px;box-shadow:0 6px 24px rgba(212,84,138,.12);text-align:center;animation:fadeUp 1s .3s ease both;}
     @keyframes fadeUp{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
     .cd-title{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--pink);margin-bottom:16px;}
@@ -55,7 +40,6 @@
     .cd-num.tick{transform:scale(1.1);}
     .cd-lbl{font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--pink);margin-top:5px;}
     .cd-sep{font-size:26px;font-weight:700;color:var(--pink);padding-bottom:18px;}
-
     .music-bar{margin:0 20px 28px;background:white;border-radius:18px;padding:16px 20px;box-shadow:0 6px 24px rgba(212,84,138,.12);display:flex;align-items:center;gap:16px;animation:fadeUp 1s .5s ease both;}
     .music-btn{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#f48aaa,var(--pink));border:none;cursor:pointer;font-size:18px;color:white;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:.2s;}
     .music-btn:hover{transform:scale(1.1);}
@@ -63,80 +47,58 @@
     .music-artist{font-size:12px;color:var(--pink);margin-top:2px;}
     .waves{display:flex;gap:3px;align-items:flex-end;height:24px;}
     .w{width:4px;border-radius:2px;background:#f48aaa;animation:wv 1.2s ease-in-out infinite;}
-    .w:nth-child(1){height:8px;animation-delay:0s;}.w:nth-child(2){height:18px;animation-delay:.15s;}
-    .w:nth-child(3){height:11px;animation-delay:.3s;}.w:nth-child(4){height:22px;animation-delay:.08s;}
-    .w:nth-child(5){height:14px;animation-delay:.22s;}
+    .w:nth-child(1){height:8px;}.w:nth-child(2){height:18px;animation-delay:.15s;}.w:nth-child(3){height:11px;animation-delay:.3s;}.w:nth-child(4){height:22px;animation-delay:.08s;}.w:nth-child(5){height:14px;animation-delay:.22s;}
     @keyframes wv{0%,100%{transform:scaleY(1);}50%{transform:scaleY(.35);}}
-
     .page-nav-cards{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:0 20px 40px;animation:fadeUp 1s .6s ease both;}
     .pnc{background:white;border-radius:20px;padding:24px 16px;text-align:center;box-shadow:0 6px 24px rgba(212,84,138,.1);cursor:pointer;transition:transform .3s cubic-bezier(.34,1.56,.64,1),box-shadow .3s;border:2px solid transparent;}
     .pnc:hover{transform:translateY(-6px) scale(1.03);box-shadow:0 12px 32px rgba(212,84,138,.2);border-color:#f8bbd9;}
     .pnc-icon{font-size:36px;margin-bottom:10px;}
     .pnc-title{font-family:'Dancing Script',cursive;font-size:20px;color:var(--dark);}
     .pnc-sub{font-size:11px;color:var(--pink);margin-top:4px;}
-
     .section-hero{text-align:center;padding:36px 24px 20px;}
     .section-title{font-family:'Dancing Script',cursive;font-size:38px;color:var(--dark);}
     .section-sub{font-size:13px;color:var(--pink);margin-top:6px;}
-
     .photo-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;padding:0 20px 40px;}
     .photo-item{background:white;border-radius:18px;overflow:hidden;box-shadow:0 4px 16px rgba(212,84,138,.12);transition:transform .3s cubic-bezier(.34,1.56,.64,1);cursor:pointer;}
     .photo-item:hover{transform:scale(1.04) rotate(-1deg);}
     .photo-item:nth-child(even):hover{transform:scale(1.04) rotate(1deg);}
     .photo-frame-grid{width:100%;aspect-ratio:1;background:linear-gradient(135deg,#fce4ec,#f8bbd9);display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--pink);font-size:12px;font-weight:600;gap:6px;}
-    .photo-frame-grid img{width:100%;height:100%;object-fit:cover;}
     .photo-frame-grid span{font-size:32px;}
     .photo-caption-grid{padding:10px 12px 12px;font-family:'Dancing Script',cursive;font-size:16px;color:var(--dark);text-align:center;}
-
     .lightbox{display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.85);align-items:center;justify-content:center;flex-direction:column;gap:16px;}
     .lightbox.open{display:flex;}
     .lightbox img{max-width:90vw;max-height:70vh;border-radius:16px;object-fit:contain;}
     .lightbox-cap{color:white;font-family:'Dancing Script',cursive;font-size:22px;}
     .lightbox-close{position:absolute;top:20px;right:24px;background:none;border:none;color:white;font-size:32px;cursor:pointer;}
-
     .video-grid{display:flex;flex-direction:column;gap:16px;padding:0 20px 40px;}
     .video-item{background:white;border-radius:18px;overflow:hidden;box-shadow:0 4px 16px rgba(212,84,138,.12);}
     .video-thumb{width:100%;aspect-ratio:16/9;background:linear-gradient(135deg,#f3e5f5,#fce4ec);display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;position:relative;overflow:hidden;}
-    .play-overlay{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;background:rgba(181,41,78,.08);transition:.2s;}
+    .play-overlay{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;background:rgba(181,41,78,.08);}
     .play-circle{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#f48aaa,var(--dark));display:flex;align-items:center;justify-content:center;font-size:22px;color:white;box-shadow:0 4px 16px rgba(181,41,78,.3);transition:transform .2s;}
     .video-thumb:hover .play-circle{transform:scale(1.1);}
     .play-label{font-size:12px;color:var(--dark);font-weight:600;}
     .video-info{padding:14px 16px;}
     .video-title{font-size:14px;font-weight:600;color:var(--dark);}
     .video-desc{font-size:12px;color:var(--pink);margin-top:3px;}
-
     .messages-wrap{padding:0 20px 40px;display:flex;flex-direction:column;gap:14px;}
     .msg-card{background:white;border-radius:18px;padding:20px;box-shadow:0 4px 16px rgba(212,84,138,.1);border-left:4px solid #f48aaa;animation:fadeUp .6s ease both;}
     .msg-from{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--pink);font-weight:700;margin-bottom:6px;}
     .msg-text{font-size:14px;line-height:1.8;color:var(--text);}
     .msg-emoji{font-size:20px;margin-top:8px;}
-
     .footer{text-align:center;padding:20px;font-family:'Dancing Script',cursive;font-size:20px;color:var(--pink);}
-
-    /* ✨ SHAKE animation for wrong password */
-    @keyframes shake{0%,100%{transform:translateX(0);}20%{transform:translateX(-8px);}40%{transform:translateX(8px);}60%{transform:translateX(-6px);}80%{transform:translateX(6px);}}
-    .shake{animation:shake .4s ease;}
   </style>
 </head>
 <body>
 
 <div id="hearts-bg"></div>
 
-<!-- PAGE 1 — LOGIN -->
 <div id="page-login" class="page active">
   <div class="lock-icon">🎀</div>
   <h1>A Special Surprise</h1>
-  <p>Enter the secret password to unlock 💕</p>
-  <div class="login-card" id="login-card">
-    <label for="pw-input">Secret Password</label>
-    <input type="password" id="pw-input" placeholder="✦ ✦ ✦ ✦ ✦" maxlength="20" autocomplete="off"/>
-    <button class="btn-primary" id="unlock-btn">Unlock Surprise 🎁</button>
-    <div class="login-error" id="login-error">Wrong password da! Try again 😅</div>
-    <div class="login-hint">Hint: unga best friend's nickname 🤭</div>
-  </div>
+  <p>Just for you, Priya 💕</p>
+  <button class="open-btn" id="open-btn">Open Your Surprise 🎁</button>
 </div>
 
-<!-- NAVBAR -->
 <nav class="navbar" id="navbar" style="display:none;">
   <div class="nav-logo">💕 Priya</div>
   <div class="nav-links">
@@ -147,7 +109,6 @@
   </div>
 </nav>
 
-<!-- PAGE 2 — HOME -->
 <div id="page-home" class="page">
   <div class="hero">
     <div class="hero-label">✦ Happy Birthday ✦</div>
@@ -184,78 +145,41 @@
   <div class="footer">Made with 💕 just for you</div>
 </div>
 
-<!-- PAGE 3 — PHOTOS -->
 <div id="page-photos" class="page">
   <div class="section-hero">
     <div class="section-title">📷 Our Memories</div>
     <div class="section-sub">Every photo tells our story 💕</div>
   </div>
   <div class="photo-grid">
-    <div class="photo-item" data-caption="Best memories 💕">
-      <div class="photo-frame-grid"><span>📷</span>Add photo 1</div>
-      <div class="photo-caption-grid">Best memories</div>
-    </div>
-    <div class="photo-item" data-caption="Always smiling 🌸">
-      <div class="photo-frame-grid" style="background:linear-gradient(135deg,#f3e5f5,#e1bee7)"><span>🌸</span>Add photo 2</div>
-      <div class="photo-caption-grid">Always smiling</div>
-    </div>
-    <div class="photo-item" data-caption="Forever friends 🎀">
-      <div class="photo-frame-grid" style="background:linear-gradient(135deg,#e8f5e9,#c8e6c9)"><span>🎀</span>Add photo 3</div>
-      <div class="photo-caption-grid">Forever friends</div>
-    </div>
-    <div class="photo-item" data-caption="The best day ✨">
-      <div class="photo-frame-grid" style="background:linear-gradient(135deg,#fff8e1,#ffecb3)"><span>✨</span>Add photo 4</div>
-      <div class="photo-caption-grid">The best day</div>
-    </div>
-    <div class="photo-item" data-caption="So much fun 💖">
-      <div class="photo-frame-grid" style="background:linear-gradient(135deg,#e3f2fd,#bbdefb)"><span>💖</span>Add photo 5</div>
-      <div class="photo-caption-grid">So much fun</div>
-    </div>
-    <div class="photo-item" data-caption="My favourite person 🌹">
-      <div class="photo-frame-grid" style="background:linear-gradient(135deg,#fce4ec,#f8bbd9)"><span>🌹</span>Add photo 6</div>
-      <div class="photo-caption-grid">My favourite person</div>
-    </div>
+    <div class="photo-item" data-caption="Best memories 💕"><div class="photo-frame-grid"><span>📷</span>Add photo 1</div><div class="photo-caption-grid">Best memories</div></div>
+    <div class="photo-item" data-caption="Always smiling 🌸"><div class="photo-frame-grid" style="background:linear-gradient(135deg,#f3e5f5,#e1bee7)"><span>🌸</span>Add photo 2</div><div class="photo-caption-grid">Always smiling</div></div>
+    <div class="photo-item" data-caption="Forever friends 🎀"><div class="photo-frame-grid" style="background:linear-gradient(135deg,#e8f5e9,#c8e6c9)"><span>🎀</span>Add photo 3</div><div class="photo-caption-grid">Forever friends</div></div>
+    <div class="photo-item" data-caption="The best day ✨"><div class="photo-frame-grid" style="background:linear-gradient(135deg,#fff8e1,#ffecb3)"><span>✨</span>Add photo 4</div><div class="photo-caption-grid">The best day</div></div>
+    <div class="photo-item" data-caption="So much fun 💖"><div class="photo-frame-grid" style="background:linear-gradient(135deg,#e3f2fd,#bbdefb)"><span>💖</span>Add photo 5</div><div class="photo-caption-grid">So much fun</div></div>
+    <div class="photo-item" data-caption="My favourite person 🌹"><div class="photo-frame-grid" style="background:linear-gradient(135deg,#fce4ec,#f8bbd9)"><span>🌹</span>Add photo 6</div><div class="photo-caption-grid">My favourite person</div></div>
   </div>
   <div class="footer">Made with 💕 just for you</div>
 </div>
 
-<!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox">
   <button class="lightbox-close" id="lightbox-close">✕</button>
   <img id="lightbox-img" src="" alt=""/>
   <div class="lightbox-cap" id="lightbox-cap"></div>
 </div>
 
-<!-- PAGE 4 — VIDEOS -->
 <div id="page-videos" class="page">
   <div class="section-hero">
     <div class="section-title">🎬 Special Moments</div>
     <div class="section-sub">Videos that made us smile 💕</div>
   </div>
   <div class="video-grid">
-    <div class="video-item">
-      <div class="video-thumb">
-        <div class="play-overlay"><div class="play-circle">▶</div><div class="play-label">Add video1.mp4</div></div>
-      </div>
-      <div class="video-info"><div class="video-title">Our best day together</div><div class="video-desc">Remember this? 😄</div></div>
-    </div>
-    <div class="video-item">
-      <div class="video-thumb">
-        <div class="play-overlay"><div class="play-circle">▶</div><div class="play-label">Add video2.mp4</div></div>
-      </div>
-      <div class="video-info"><div class="video-title">That funny moment</div><div class="video-desc">Still makes me laugh 😂</div></div>
-    </div>
-    <div class="video-item">
-      <div class="video-thumb">
-        <div class="play-overlay"><div class="play-circle">▶</div><div class="play-label">Add video3.mp4</div></div>
-      </div>
-      <div class="video-info"><div class="video-title">A birthday message</div><div class="video-desc">Just for you 💕</div></div>
-    </div>
+    <div class="video-item"><div class="video-thumb"><div class="play-overlay"><div class="play-circle">▶</div><div class="play-label">Add video1.mp4</div></div></div><div class="video-info"><div class="video-title">Our best day together</div><div class="video-desc">Remember this? 😄</div></div></div>
+    <div class="video-item"><div class="video-thumb"><div class="play-overlay"><div class="play-circle">▶</div><div class="play-label">Add video2.mp4</div></div></div><div class="video-info"><div class="video-title">That funny moment</div><div class="video-desc">Still makes me laugh 😂</div></div></div>
+    <div class="video-item"><div class="video-thumb"><div class="play-overlay"><div class="play-circle">▶</div><div class="play-label">Add video3.mp4</div></div></div><div class="video-info"><div class="video-title">A birthday message</div><div class="video-desc">Just for you 💕</div></div></div>
   </div>
   <div class="footer">Made with 💕 just for you</div>
 </div>
 
-<!-- PAGE 5 — MESSAGES -->
 <div id="page-messages" class="page">
   <div class="section-hero">
     <div class="section-title">💌 With Love</div>
@@ -282,127 +206,88 @@
 </div>
 
 <script>
-  // ============================================================
-  // ✏️  CUSTOMIZE HERE — change these 2 values only
-  // ============================================================
-  const SECRET_PASSWORD = 'hello';          // ← password maaththu
-  const BIRTHDAY = new Date(2006, 05, 11);     // ← (Year, Month-1, Day)
-  // ============================================================
+  const BIRTHDAY = new Date(2026, 5, 11);
 
-  // HEARTS BACKGROUND
   const emojis = ['💕','💗','💖','🌸','✨','💝','🎀','🌹'];
   const bg = document.getElementById('hearts-bg');
   function spawnHeart() {
     const el = document.createElement('div');
     el.className = 'fh';
     el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-    el.style.cssText = `left:${Math.random()*100}%;font-size:${12+Math.random()*18}px;animation-duration:${5+Math.random()*5}s;animation-delay:${Math.random()*2}s;`;
+    el.style.cssText = 'left:'+Math.random()*100+'%;font-size:'+(12+Math.random()*18)+'px;animation-duration:'+(5+Math.random()*5)+'s;animation-delay:'+Math.random()*2+'s;';
     bg.appendChild(el);
-    setTimeout(() => el.remove(), 12000);
+    setTimeout(function(){ el.remove(); }, 12000);
   }
-  for (let i = 0; i < 6; i++) setTimeout(spawnHeart, i * 400);
+  for (var i = 0; i < 6; i++) setTimeout(spawnHeart, i * 400);
   setInterval(spawnHeart, 900);
 
-  // ── PASSWORD LOGIN ──────────────────────────────────────────
-  const pwInput   = document.getElementById('pw-input');
-  const unlockBtn = document.getElementById('unlock-btn');
-  const loginErr  = document.getElementById('login-error');
-  const loginCard = document.getElementById('login-card');
-
-  function checkLogin() {
-    const typed   = pwInput.value.trim().toLowerCase();
-    const correct = SECRET_PASSWORD.trim().toLowerCase();
-    if (typed === correct) {
-      document.getElementById('page-login').classList.remove('active');
-      document.getElementById('navbar').style.display = 'flex';
-      showPage('home', 'nav-home');
-      confettiBurst();
-    } else {
-      loginErr.style.display = 'block';
-      pwInput.style.borderColor = '#e24b4b';
-      pwInput.value = '';
-      // shake the card
-      loginCard.classList.remove('shake');
-      void loginCard.offsetWidth; // reflow
-      loginCard.classList.add('shake');
-      setTimeout(() => {
-        loginErr.style.display = 'none';
-        pwInput.style.borderColor = '#f8bbd9';
-        loginCard.classList.remove('shake');
-      }, 2500);
-    }
-  }
-
-  unlockBtn.addEventListener('click', checkLogin);
-  pwInput.addEventListener('keydown', function(e) {
-    if (e.key === 'Enter') checkLogin();
+  document.getElementById('open-btn').addEventListener('click', function() {
+    document.getElementById('page-login').classList.remove('active');
+    document.getElementById('navbar').style.display = 'flex';
+    showPage('home', 'nav-home');
+    confettiBurst();
   });
 
-  // ── PAGE NAVIGATION ─────────────────────────────────────────
   function showPage(name, activeNavId) {
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.page').forEach(function(p){ p.classList.remove('active'); });
     document.getElementById('page-' + name).classList.add('active');
-    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.nav-btn').forEach(function(b){ b.classList.remove('active'); });
     if (activeNavId) document.getElementById(activeNavId).classList.add('active');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  document.getElementById('nav-home').addEventListener('click',     () => showPage('home',     'nav-home'));
-  document.getElementById('nav-photos').addEventListener('click',   () => showPage('photos',   'nav-photos'));
-  document.getElementById('nav-videos').addEventListener('click',   () => showPage('videos',   'nav-videos'));
-  document.getElementById('nav-messages').addEventListener('click', () => showPage('messages', 'nav-messages'));
-
-  document.getElementById('card-photos').addEventListener('click',    () => showPage('photos',   'nav-photos'));
-  document.getElementById('card-videos').addEventListener('click',    () => showPage('videos',   'nav-videos'));
-  document.getElementById('card-messages').addEventListener('click',  () => showPage('messages', 'nav-messages'));
+  document.getElementById('nav-home').addEventListener('click', function(){ showPage('home','nav-home'); });
+  document.getElementById('nav-photos').addEventListener('click', function(){ showPage('photos','nav-photos'); });
+  document.getElementById('nav-videos').addEventListener('click', function(){ showPage('videos','nav-videos'); });
+  document.getElementById('nav-messages').addEventListener('click', function(){ showPage('messages','nav-messages'); });
+  document.getElementById('card-photos').addEventListener('click', function(){ showPage('photos','nav-photos'); });
+  document.getElementById('card-videos').addEventListener('click', function(){ showPage('videos','nav-videos'); });
+  document.getElementById('card-messages').addEventListener('click', function(){ showPage('messages','nav-messages'); });
   document.getElementById('card-celebrate').addEventListener('click', confettiBurst);
 
-  // ── COUNTDOWN ───────────────────────────────────────────────
   function pad(n) { return String(n).padStart(2, '0'); }
   function tick() {
-    let diff = BIRTHDAY - new Date();
+    var diff = BIRTHDAY - new Date();
     if (diff <= 0) {
-      ['cd-d','cd-h','cd-m','cd-s'].forEach(id => {
-        const e = document.getElementById(id);
+      ['cd-d','cd-h','cd-m','cd-s'].forEach(function(id){
+        var e = document.getElementById(id);
         if (e) e.textContent = '🎂';
       });
       return;
     }
-    const d = Math.floor(diff / 86400000); diff -= d * 86400000;
-    const h = Math.floor(diff / 3600000);  diff -= h * 3600000;
-    const m = Math.floor(diff / 60000);    diff -= m * 60000;
-    const s = Math.floor(diff / 1000);
-    [['cd-d',d],['cd-h',h],['cd-m',m],['cd-s',s]].forEach(([id,v]) => {
-      const el = document.getElementById(id); if (!el) return;
-      const val = pad(v);
+    var d = Math.floor(diff/86400000); diff -= d*86400000;
+    var h = Math.floor(diff/3600000);  diff -= h*3600000;
+    var m = Math.floor(diff/60000);    diff -= m*60000;
+    var s = Math.floor(diff/1000);
+    [['cd-d',d],['cd-h',h],['cd-m',m],['cd-s',s]].forEach(function(pair){
+      var el = document.getElementById(pair[0]); if (!el) return;
+      var val = pad(pair[1]);
       if (el.textContent !== val) {
         el.textContent = val;
         el.classList.add('tick');
-        setTimeout(() => el.classList.remove('tick'), 150);
+        setTimeout(function(){ el.classList.remove('tick'); }, 150);
       }
     });
   }
   tick();
   setInterval(tick, 1000);
 
-  // ── MUSIC ───────────────────────────────────────────────────
-  const audio   = document.getElementById('bgMusic');
-  const playBtn = document.getElementById('play-btn');
-  let playing   = false;
+  var audio = document.getElementById('bgMusic');
+  var playBtn = document.getElementById('play-btn');
+  var playing = false;
   playBtn.addEventListener('click', function() {
     if (!audio.src || audio.src === window.location.href) {
-      alert('Song add pannanum!\n<audio> tag la src="song.mp3" podu 🎵');
+      alert('Song add pannanum! src="song.mp3" podu');
       return;
     }
     if (playing) { audio.pause(); playBtn.textContent = '▶'; }
-    else         { audio.play(); playBtn.textContent  = '⏸'; }
+    else { audio.play(); playBtn.textContent = '⏸'; }
     playing = !playing;
   });
 
-  // ── LIGHTBOX ─────────────────────────────────────────────────
   document.querySelectorAll('.photo-item').forEach(function(item) {
     item.addEventListener('click', function() {
-      const img = item.querySelector('img');
+      var img = item.querySelector('img');
       if (!img) return;
       document.getElementById('lightbox-img').src = img.src;
       document.getElementById('lightbox-cap').textContent = item.dataset.caption || '';
@@ -417,15 +302,14 @@
     document.getElementById('lightbox').classList.remove('open');
   });
 
-  // ── CONFETTI ─────────────────────────────────────────────────
   function confettiBurst() {
-    const colors = ['💕','🎉','✨','🎀','💖','🌸','🎊','🌹'];
-    for (let i = 0; i < 28; i++) {
-      const el = document.createElement('div');
-      el.style.cssText = `position:fixed;left:${Math.random()*100}%;top:${Math.random()*40+20}%;font-size:${16+Math.random()*22}px;z-index:9999;pointer-events:none;animation:floatUp ${2+Math.random()*2}s ease forwards;`;
+    var colors = ['💕','🎉','✨','🎀','💖','🌸','🎊','🌹'];
+    for (var i = 0; i < 28; i++) {
+      var el = document.createElement('div');
+      el.style.cssText = 'position:fixed;left:'+Math.random()*100+'%;top:'+(Math.random()*40+20)+'%;font-size:'+(16+Math.random()*22)+'px;z-index:9999;pointer-events:none;animation:floatUp '+(2+Math.random()*2)+'s ease forwards;';
       el.textContent = colors[Math.floor(Math.random() * colors.length)];
       document.body.appendChild(el);
-      setTimeout(() => el.remove(), 4000);
+      setTimeout(function(){ el.remove(); }, 4000);
     }
   }
 </script>
